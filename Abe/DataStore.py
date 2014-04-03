@@ -58,6 +58,8 @@ CONFIG_DEFAULTS = {
 WORK_BITS = 304  # XXX more than necessary.
 
 CHAIN_CONFIG = [
+    {"chain":"Hirocoin",
+     "code3":"HIRO", "address_version":"\x28", "magic":"\xfe\xc4\xb9\xde"},
     #{"chain":"",
     # "code3":"", "address_version":"\x", "magic":""},
     ]
