@@ -317,5 +317,6 @@ host localhost
 datadir += [{
     "dirname": "/home/hirocoin/.hirocoin",
     "loader": "blkfile",
-    "chain": "Hirocoin"
+    "chain": "Hirocoin",
+    "policy": "X11"
 }]
