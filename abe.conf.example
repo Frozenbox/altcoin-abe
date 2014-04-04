@@ -31,7 +31,7 @@
 
 # MySQL example; see also README-MYSQL.txt:
 #dbtype MySQLdb
-#connect-args {"user":"root","db":"abe"}
+#connect-args {"user":"abe","db":"abe","passwd":"YOURPASSWORD"}
 
 # SQLite3 example:
 #dbtype = sqlite3
@@ -109,9 +109,10 @@
 
 # datadir 
 #datadir += [{
-#        "dirname": "/home/bitcoin/.bitcoin",
-#        "loader": "rpc",    # See the comments for default-loader below.
-#        "chain": "Bitcoin"
+#        "dirname": "/home/user/.Cypherfunk",
+#        "loader": "blkfile",    # See the comments for default-loader below.
+#        "chain": "Cypherfunk",
+#        "conf": "Cypherfunk.conf"
 #      }]
 #datadir += [{
 #        "dirname": "/home/jtobey/.novacoin",
@@ -187,32 +188,39 @@
 #    "DONATIONS_NMC": "NJ3MSELK1cWnqUa6xhF2wUYAnz3RSrWXcK"
 #}
 #template_vars += { "DONATIONS_BTC": "1YourBitcoinAddressHere" }
-#template_vars += { "HOMEPAGE": "chain/Bitcoin" }
-#template = "
-#<!DOCTYPE html>
-#<html lang=\"en\">
-#<head>
-#    <link rel=\"stylesheet\" type=\"text/css\"
-#     href=\"%(dotdot)s%(STATIC_PATH)sabe.css\" />
-#    <link rel=\"shortcut icon\" href=\"%(dotdot)s%(STATIC_PATH)sfavicon.ico\" />
-#    <title>%(title)s</title>
-#</head>
-#<body>
-#    <h1><a href=\"%(dotdot)s%(HOMEPAGE)s\"><img
-#     src=\"%(dotdot)s%(STATIC_PATH)slogo32.png\" alt=\"Abe logo\" /></a> %(h1)s
-#    </h1>
-#    %(body)s
-#    <p style=\"font-size: smaller\">
-#        <span style=\"font-style: italic\">
-#            Powered by <a href=\"%(ABE_URL)s\">%(APPNAME)s</a>
-#        </span>
-#        Tips appreciated!
-#        <a href=\"%(dotdot)saddress/%(DONATIONS_BTC)s\">BTC</a>
-#        <a href=\"%(dotdot)saddress/%(DONATIONS_NMC)s\">NMC</a>
-#    </p>
-#</body>
-#</html>
-#"
+template_vars += { "HOMEPAGE": "chains" }
+template = "
+<!DOCTYPE html>
+<html lang=\"en\">
+<head>
+    <link rel=\"stylesheet\"
+     href=\"//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css\">
+    <link rel=\"stylesheet\" type=\"text/css\"
+     href=\"//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css\">
+    <link rel=\"stylesheet\" type=\"text/css\"
+     href=\"%(dotdot)s%(STATIC_PATH)sabe.css\" />
+    <link rel=\"shortcut icon\" href=\"%(dotdot)s%(STATIC_PATH)sfavicon.ico\" />
+    <title>%(title)s</title>
+</head>
+<body>
+    <div class=\"container\">
+        <a href=\"%(dotdot)s%(HOMEPAGE)s\"><img id=\"logo\"
+         src=\"%(dotdot)s%(STATIC_PATH)slogo32.png\" alt=\"Abe logo\" /></a><h1 class=\"text-center\">%(h1)s
+        </h1>
+        %(body)s
+        <p style=\"font-size: smaller\">
+            <span style=\"font-style: italic\">
+                Powered by <a href=\"%(ABE_URL)s\">%(APPNAME)s</a>
+            </span>
+            Tips appreciated!
+            <a href=\"%(dotdot)saddress/%(DONATIONS_BTC)s\">BTC</a>
+            <a href=\"%(dotdot)saddress/%(DONATIONS_NMC)s\">NMC</a>
+        </p>
+    </div>
+</body>
+<script src=\"//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js\"></script>
+</html>
+"
 
 # Save blocks to the database after reading this many bytes from a
 # file.  Abe may run faster with a higher value, for example 10000,
@@ -308,3 +316,11 @@
 # entry takes precedence over "default-loader".
 #
 #default-loader = default
+dbtype MySQLdb
+connect-args {"user":"abe","db":"abe","passwd":"YOURPASSWORD"}
+datadir += [{
+        "dirname": "/home/user/.Cypherfunk",
+        "loader": "blkfile",
+        "chain": "Cypherfunk",
+        "conf": "Cypherfunk.conf"
+      }]

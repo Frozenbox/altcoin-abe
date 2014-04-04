@@ -20,13 +20,15 @@ import BCDataStream
 import util
 
 def create(policy, **kwargs):
-    #print "create(%s, %r)" % (policy, kwargs)
+    print "create(%s, %r)" % (policy, kwargs)
     if policy in [None, "Bitcoin"]: return Bitcoin(**kwargs)
     if policy == "Testnet":         return Testnet(**kwargs)
     if policy == "Namecoin":        return Namecoin(**kwargs)
     if policy == "LegacyNoBit8":    return Sha256Chain(**kwargs)
     if policy == "NovaCoin":        return NovaCoin(**kwargs)
     if policy == "CryptoCash":      return CryptoCash(**kwargs)
+    #if policy == "Cypherfunk":      return Cypherfunk(**kwargs)
+    if policy == "Scrypt":          return LtcScryptChain(**kwargs)
     return Sha256NmcAuxPowChain(**kwargs)
 
 
@@ -345,3 +347,15 @@ class CryptoCash(NvcChain):
 
     datadir_conf_file_name = "Cash.conf"
     datadir_rpcport = 3941
+
+"""class Cypherfunk(LtcScryptChain):
+    def __init__(chain, **kwargs):
+        chain.name = 'Cypherfunk'
+        chain.code3 = 'FUNK'
+        chain.address_version = '\x1c'
+        chain.script_addr_vers = '\x05'
+        chain.magic = '\xfc\xc1\xb7\xdc'
+        Chain.__init__(chain, **kwargs)
+
+    datadir_conf_file_name = "Cypherfunk.conf"
+    datadir_rpcport = 33663"""

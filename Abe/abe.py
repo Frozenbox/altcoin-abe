@@ -39,12 +39,12 @@ import base58
 
 __version__ = version.__version__
 
-ABE_APPNAME = "Abe"
+ABE_APPNAME = "Cypherfunk Block Explorer"
 ABE_VERSION = __version__
-ABE_URL = 'https://github.com/bitcoin-abe/bitcoin-abe'
+ABE_URL = 'https://github.com/n00bsys0p/cypherfunk-abe'
 
-COPYRIGHT_YEARS = '2011'
-COPYRIGHT = "Abe developers"
+COPYRIGHT_YEARS = '2011, 2014'
+COPYRIGHT = "Abe developers, Cypherfunk developers"
 COPYRIGHT_URL = 'https://github.com/bitcoin-abe'
 
 DONATIONS_BTC = '1PWC7PNHL1SgvZaN7xEtygenKjWobWsCuf'
@@ -69,7 +69,7 @@ DEFAULT_TEMPLATE = """
 </head>
 <body>
     <h1><a href="%(dotdot)s%(HOMEPAGE)s"><img
-     src="%(dotdot)s%(STATIC_PATH)slogo32.png" alt="Abe logo" /></a> %(h1)s
+     src="%(dotdot)s%(STATIC_PATH)slogo32.png" alt="Cypherfunk logo" /></a> %(h1)s
     </h1>
     %(body)s
     <p><a href="%(dotdot)sq">API</a> (machine-readable pages)</p>
@@ -247,12 +247,12 @@ class Abe:
             handler(page)
         except PageNotFound:
             status = '404 Not Found'
-            page['body'] = ['<p class="error">Sorry, ', env['SCRIPT_NAME'],
+            page['body'] = ['<p class="alert alert-danger">Sorry, ', env['SCRIPT_NAME'],
                             env['PATH_INFO'],
                             ' does not exist on this server.</p>']
         except NoSuchChainError, e:
             page['body'] += [
-                '<p class="error">'
+                '<p class="alert alert-danger">'
                 'Sorry, I don\'t know about that chain!</p>\n']
         except Redirect:
             return redirect(page)
@@ -287,7 +287,7 @@ class Abe:
         body = page['body']
         body += [
             abe.search_form(page),
-            '<table>\n',
+            '<table class="table">\n',
             '<tr><th>Currency</th><th>Code</th><th>Block</th><th>Time</th>',
             '<th>Started</th><th>Age (days)</th><th>Coins Created</th>',
             '<th>Avg Coin Age</th><th>',
@@ -428,7 +428,7 @@ class Abe:
             if orig_hi is None and count > 0:
                 body += ['<p>I have no blocks in this chain.</p>']
             else:
-                body += ['<p class="error">'
+                body += ['<p class="alert alert-danger">'
                          'The requested range contains no blocks.</p>\n']
             return
 
@@ -478,7 +478,7 @@ class Abe:
         extra = False
         #extra = True
         body += ['<p>', nav, '</p>\n',
-                 '<table><tr><th>Block</th><th>Approx. Time</th>',
+                 '<table class="table"><tr><th>Block</th><th>Approx. Time</th>',
                  '<th>Transactions</th><th>Value Out</th>',
                  '<th>Difficulty</th><th>Outstanding</th>',
                  '<th>Average Age</th><th>Chain Age</th>',
@@ -533,11 +533,11 @@ class Abe:
         try:
             b = abe.store.export_block(chain, **kwargs)
         except DataStore.MalformedHash:
-            body += ['<p class="error">Not in correct format.</p>']
+            body += ['<p class="alert alert-danger">Not in correct format.</p>']
             return
 
         if b is None:
-            body += ['<p class="error">Block not found.</p>']
+            body += ['<p class="alert alert-danger">Block not found.</p>']
             return
 
         in_longest = False
@@ -551,7 +551,7 @@ class Abe:
             page['title'] = [escape(chain.name), ' ', b['height']]
             page['h1'] = ['<a href="', page['dotdot'], 'chain/',
                           escape(chain.name), '?hi=', b['height'], '">',
-                          escape(chain.name), '</a> ', b['height']]
+                          escape(chain.name), '</a> Block ', b['height']]
         else:
             page['title'] = ['Block ', b['hash'][:4], '...', b['hash'][-10:]]
 
@@ -560,7 +560,9 @@ class Abe:
         is_stake_chain = chain.has_feature('nvc_proof_of_stake')
         is_stake_block = is_stake_chain and b['is_proof_of_stake']
 
-        body += ['<p>']
+        body += ['<div class="panel panel-default">\n']
+        body += ['<div class="panel-header"><h3 class="panel-heading">Block Details</h3></div>']
+        body += '<div class="panel-body">\n'
         if is_stake_chain:
             body += [
                 'Proof of Stake' if is_stake_block else 'Proof of Work',
@@ -611,11 +613,12 @@ class Abe:
              ';total_ss=',b['chain_satoshi_seconds'],';destroyed=',b['satoshis_destroyed']]
             if abe.debug else '',
 
-            '</p>\n']
+            '</div>\n']
+        body += '</div>\n'
 
         body += ['<h3>Transactions</h3>\n']
 
-        body += ['<table><tr><th>Transaction</th><th>Fee</th>'
+        body += ['<table class="table"><tr><th>Transaction</th><th>Fee</th>'
                  '<th>Size (kB)</th><th>From (amount)</th><th>To (amount)</th>'
                  '</tr>\n']
 
@@ -664,7 +667,7 @@ class Abe:
         page['title'] = 'Block'
 
         if not is_hash_prefix(block_hash):
-            page['body'] += ['<p class="error">Not a valid block hash.</p>']
+            page['body'] += ['<p class="alert alert-danger">Not a valid block hash.</p>']
             return
 
         abe._show_block(page, '', None, block_hash=block_hash)
@@ -679,18 +682,18 @@ class Abe:
         body = page['body']
 
         if not is_hash_prefix(tx_hash):
-            body += ['<p class="error">Not a valid transaction hash.</p>']
+            body += ['<p class="alert alert-danger">Not a valid transaction hash.</p>']
             return
 
         try:
             # XXX Should pass chain to export_tx to help parse scripts.
             tx = abe.store.export_tx(tx_hash = tx_hash, format = 'browser')
         except DataStore.MalformedHash:
-            body += ['<p class="error">Not in correct format.</p>']
+            body += ['<p class="alert alert-danger">Not in correct format.</p>']
             return
 
         if tx is None:
-            body += ['<p class="error">Transaction not found.</p>']
+            body += ['<p class="alert alert-danger">Transaction not found.</p>']
             return
 
         return abe.show_tx(page, tx)
@@ -756,7 +759,7 @@ class Abe:
             '<br />\n',
             '<a href="../rawtx/', tx['hash'], '">Raw transaction</a><br />\n']
         body += ['</p>\n',
-                 '<a name="inputs"><h3>Inputs</h3></a>\n<table>\n',
+                 '<a name="inputs"><h3>Inputs</h3></a>\n<table class="table">\n',
                  '<tr><th>Index</th><th>Previous output</th><th>Amount</th>',
                  '<th>From address</th>']
         if abe.store.keep_scriptsig:
@@ -766,7 +769,7 @@ class Abe:
             row_to_html(txin, 'i', 'o',
                         'Generation' if is_coinbase else 'Unknown')
         body += ['</table>\n',
-                 '<a name="outputs"><h3>Outputs</h3></a>\n<table>\n',
+                 '<a name="outputs"><h3>Outputs</h3></a>\n<table class="table">\n',
                  '<tr><th>Index</th><th>Redeemed at input</th><th>Amount</th>',
                  '<th>To address</th><th>ScriptPubKey</th></tr>\n']
         for txout in tx['out']:
@@ -879,7 +882,7 @@ class Abe:
 
         body += ['</p>\n'
                  '<h3>Transactions</h3>\n'
-                 '<table class="addrhist">\n<tr><th>Transaction</th><th>Block</th>'
+                 '<table class="table addrhist">\n<tr><th>Transaction</th><th>Block</th>'
                  '<th>Approx. Time</th><th>Amount</th><th>Balance</th>'
                  '<th>Currency</th></tr>\n']
 
@@ -914,11 +917,11 @@ class Abe:
     def search_form(abe, page):
         q = (page['params'].get('q') or [''])[0]
         return [
-            '<p>Search by address, block number or hash, transaction or'
+            '<p class="text-center">Search by address, block number or hash, transaction or'
             ' public key hash, or chain name:</p>\n'
-            '<form action="', page['dotdot'], 'search"><p>\n'
+            '<form action="', page['dotdot'], 'search" id="search"><p class="text-center">\n'
             '<input name="q" size="64" value="', escape(q), '" />'
-            '<button type="submit">Search</button>\n'
+            '<button type="submit" class="btn btn-primary">Search</button>\n'
             '<br />Address or hash search requires at least the first ',
             HASH_PREFIX_MIN, ' characters.</p></form>\n']
 
