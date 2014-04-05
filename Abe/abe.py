@@ -83,8 +83,8 @@ DEFAULT_TEMPLATE = """
                 Powered by <a href="%(ABE_URL)s">%(APPNAME)s</a>
             </span>
             Tips appreciated!
-            <a href="%(dotdot)saddress/%(DONATIONS_BTC)s">BTC</a>
-            <a href="%(dotdot)saddress/%(DONATIONS_NMC)s">NMC</a>
+            <a href="https://blockchain.info/address/%(DONATIONS_BTC)s">BTC (Abe developers)</a>
+            <a href="%(dotdot)saddress/%(DONATIONS_FUNK)s">FUNK (Cypherfunk Block Explorer developers)</a>
         </p>
     </div>
 </body>
