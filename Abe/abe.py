@@ -80,8 +80,7 @@ DEFAULT_TEMPLATE = """
         </span>
         %(download)s
         Tips appreciated!
-        <a href="%(dotdot)saddress/%(DONATIONS_BTC)s">BTC (ABE developers)</a>
-        <a href="%(dotdot)saddress/%(DONATIONS_NMC)s">NMC (ABE developers)</a>
+        <a href="https://blockchain.info/address/%(DONATIONS_BTC)s">BTC (ABE developers)</a>
         <a href="%(dotdot)saddress/%(DONATIONS_FUNK)s">FUNK (Cypherfunk Block Explorer developers)</a>
     </p>
 </body>
