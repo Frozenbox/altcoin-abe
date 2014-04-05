@@ -63,27 +63,32 @@ DEFAULT_TEMPLATE = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet"
+     href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css"
+     href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css"
      href="%(dotdot)s%(STATIC_PATH)sabe.css" />
     <link rel="shortcut icon" href="%(dotdot)s%(STATIC_PATH)sfavicon.ico" />
     <title>%(title)s</title>
 </head>
 <body>
-    <h1><a href="%(dotdot)s%(HOMEPAGE)s"><img
-     src="%(dotdot)s%(STATIC_PATH)slogo32.png" alt="Cypherfunk logo" /></a> %(h1)s
-    </h1>
-    %(body)s
-    <p><a href="%(dotdot)sq">API</a> (machine-readable pages)</p>
-    <p style="font-size: smaller">
-        <span style="font-style: italic">
-            Powered by <a href="%(ABE_URL)s">%(APPNAME)s</a>
-        </span>
-        %(download)s
-        Tips appreciated!
-        <a href="https://blockchain.info/address/%(DONATIONS_BTC)s">BTC (ABE developers)</a>
-        <a href="%(dotdot)saddress/%(DONATIONS_FUNK)s">FUNK (Cypherfunk Block Explorer developers)</a>
-    </p>
+    <div class="container">
+        <a href="%(dotdot)s%(HOMEPAGE)s"><img id="logo"
+         src="%(dotdot)s%(STATIC_PATH)slogo32.png" alt="Cypherfunk logo" /></a><h1 class="text-center">%(h1)s
+        </h1>
+        %(body)s
+        <p style="font-size: smaller">
+            <span style="font-style: italic">
+                Powered by <a href="%(ABE_URL)s">%(APPNAME)s</a>
+            </span>
+            Tips appreciated!
+            <a href="%(dotdot)saddress/%(DONATIONS_BTC)s">BTC</a>
+            <a href="%(dotdot)saddress/%(DONATIONS_NMC)s">NMC</a>
+        </p>
+    </div>
 </body>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 </html>
 """
 
