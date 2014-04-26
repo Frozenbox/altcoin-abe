@@ -39,12 +39,12 @@ import base58
 
 __version__ = version.__version__
 
-ABE_APPNAME = "Hirocoin Block Explorer"
+ABE_APPNAME = "Ozziecoin Block Explorer"
 ABE_VERSION = __version__
-ABE_URL = 'https://github.com/n00bsys0p/hirocoin-abe'
+ABE_URL = 'https://github.com/n00bsys0p/altcoin-abe'
 
 COPYRIGHT_YEARS = '2011, 2014'
-COPYRIGHT = "Abe developers, Hirocoin developers"
+COPYRIGHT = "Abe developers, Ozziecoin developers"
 COPYRIGHT_URL = 'https://github.com/bitcoin-abe'
 
 DONATIONS_BTC = '1PWC7PNHL1SgvZaN7xEtygenKjWobWsCuf'
@@ -79,8 +79,8 @@ DEFAULT_TEMPLATE = """
         </span>
         %(download)s
         Tips appreciated!
-        <a href="%(dotdot)saddress/%(DONATIONS_BTC)s">BTC</a>
-        <a href="%(dotdot)saddress/%(DONATIONS_NMC)s">NMC</a>
+        <a href="https://blockchain.info/address/%(DONATIONS_BTC)s">BTC</a>
+        <a href="https://blockchain.info/address/%(DONATIONS_NMC)s">NMC</a>
     </p>
 </body>
 </html>

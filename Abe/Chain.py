@@ -27,6 +27,8 @@ def create(policy, **kwargs):
     if policy == "LegacyNoBit8":    return Sha256Chain(**kwargs)
     if policy == "NovaCoin":        return NovaCoin(**kwargs)
     if policy == "CryptoCash":      return CryptoCash(**kwargs)
+    if policy == "Hirocoin":        return Hirocoin(**kwargs)
+    if policy == "Ozziecoin":       return Ozziecoin(**kwargs)
     if policy == "X11":             return X11Chain(**kwargs)
     return Sha256NmcAuxPowChain(**kwargs)
 
@@ -243,6 +245,19 @@ class Hirocoin(X11Chain):
     datadir_conf_file_name = 'hirocoin.conf'
     datadir_rpcport = 9347
     datadir_p2pport = 9348
+
+class Ozziecoin(X11Chain):
+    def __init__(chain, **kwargs):
+        chain.name = 'Ozziecoin'
+        chain.code3 = 'OZC'
+        chain.address_version = '\x73'
+        chain.script_addr_vers = '\x05'
+        chain.magic = '\xef\xb4\xaa\xcf'
+        Chain.__init__(chain, **kwargs)
+
+    datadir_conf_file_name = 'ozziecoin.conf'
+    datadir_rpcport = 39141
+    datadir_p2pport = 39142
 
 class Sha256Chain(Chain):
     def block_header_hash(chain, header):
