@@ -59,7 +59,7 @@ WORK_BITS = 304  # XXX more than necessary.
 
 CHAIN_CONFIG = [
     {"chain":"Ozziecoin",
-     "code3":"OZC", "address_version":"\x73", "magic":"\xef\xb4\xaa\xcf"},
+     "code3":"OZC", "address_version":"\x73", "magic":"\xef\xb4\xaa\xcf", "decimals": "5"},
     #{"chain":"",
     # "code3":"", "address_version":"\x", "magic":""},
     ]

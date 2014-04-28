@@ -253,6 +253,7 @@ class Ozziecoin(X11Chain):
         chain.address_version = '\x73'
         chain.script_addr_vers = '\x05'
         chain.magic = '\xef\xb4\xaa\xcf'
+        chain.decimals = '5'
         Chain.__init__(chain, **kwargs)
 
     datadir_conf_file_name = 'ozziecoin.conf'
