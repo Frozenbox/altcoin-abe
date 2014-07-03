@@ -58,8 +58,8 @@ CONFIG_DEFAULTS = {
 WORK_BITS = 304  # XXX more than necessary.
 
 CHAIN_CONFIG = [
-    {"chain":"Ozziecoin",
-     "code3":"OZC", "address_version":"\x73", "magic":"\xef\xb4\xaa\xcf", "decimals": "5"},
+    {"chain": "AeroCoin",
+     "code3":"AERO", "address_version":"\x23", "magic":"\x70\x35\x22\x05"},
     #{"chain":"",
     # "code3":"", "address_version":"\x", "magic":""},
     ]

@@ -192,6 +192,8 @@ def parse_Block(vds):
   for i in xrange(nTransactions):
     d['transactions'].append(parse_Transaction(vds))
 
+  d['blockSig'] = vds.read_bytes(vds.read_compact_size())
+
   return d
   
 def deserialize_Block(d, print_raw_tx=False):

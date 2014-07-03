@@ -192,15 +192,20 @@ template = "
 <!DOCTYPE html>
 <html lang=\"en\">
 <head>
+    <link rel=\"stylesheet\"
+     href=\"//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css\">
+    <link rel=\"stylesheet\" type=\"text/css\"
+     href=\"//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css\">
     <link rel=\"stylesheet\" type=\"text/css\"
      href=\"%(dotdot)s%(STATIC_PATH)sabe.css\" />
     <link rel=\"shortcut icon\" href=\"%(dotdot)s%(STATIC_PATH)sfavicon.ico\" />
     <title>%(title)s</title>
 </head>
 <body>
-    <h1><a href=\"%(dotdot)s%(HOMEPAGE)s\"><img
-     src=\"%(dotdot)s%(STATIC_PATH)slogo32.png\" alt=\"Abe logo\" /></a> %(h1)s
-    </h1>
+    <div class=\"container\">
+    <a href=\"%(dotdot)s%(HOMEPAGE)s\"><img
+     src=\"%(dotdot)s%(STATIC_PATH)slogo32.png\" alt=\"Abe logo\" id=\"logo\" /></a>
+    <h1 class=\"text-center\">%(h1)s</h1>
     %(body)s
     <p style=\"font-size: smaller\">
         <span style=\"font-style: italic\">
@@ -210,6 +215,7 @@ template = "
         <a href=\"%(dotdot)saddress/%(DONATIONS_BTC)s\">BTC</a>
         <a href=\"%(dotdot)saddress/%(DONATIONS_NMC)s\">NMC</a>
     </p>
+    </div>
 </body>
 </html>
 "
@@ -310,13 +316,13 @@ template = "
 #default-loader = default
 default-loader = blkfile
 dbtype MySQLdb
-connect-args = {"user":"hiro-abe","db":"hiro_abe", "passwd":""}
+connect-args = {"user":"abe_aero","db":"abe_aero", "passwd":""}
 upgrade
 port 2750
 host localhost
 datadir += [{
-    "dirname": "/home/hirocoin/.hirocoin",
+    "dirname": "/home/xander/.AeroCoin",
     "loader": "blkfile",
-    "chain": "Hirocoin",
-    "policy": "X11"
+    "chain": "AeroCoin",
+    "policy": "X13"
 }]

@@ -15,16 +15,24 @@
    License along with this program.  If not, see
    <http://www.gnu.org/licenses/agpl.html>.
  */
+
+img#logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 3em;
+}
 td, th {
     font-family: Verdana, Helvetica, sans-serif;
     margin: 0;
     padding: 0 1ex;
 }
 td {
-    border-width: 1px;
-    border-style: solid;
+    border-width: 0;
+    border-style: none;
 }
 table {
+    font-size: 120%;
     border-spacing: 0;
 }
 .shortlink {

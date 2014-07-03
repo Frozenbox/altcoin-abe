@@ -29,6 +29,8 @@ def create(policy, **kwargs):
     if policy == "CryptoCash":      return CryptoCash(**kwargs)
     if policy == "Hirocoin":        return Hirocoin(**kwargs)
     if policy == "Ozziecoin":       return Ozziecoin(**kwargs)
+    if policy == "AeroCoin":        return AeroCoin(**kwargs)
+    if policy == "X13":             return X13Chain(**kwargs)
     if policy == "X11":             return X11Chain(**kwargs)
     return Sha256NmcAuxPowChain(**kwargs)
 
@@ -232,7 +234,6 @@ class X11Chain(Chain):
         import xcoin_hash
         return xcoin_hash.getPoWHash(header)
 
-
 class Hirocoin(X11Chain):
     def __init__(chain, **kwargs):
         chain.name = 'Hirocoin'
@@ -381,3 +382,22 @@ class CryptoCash(NvcChain):
 
     datadir_conf_file_name = "Cash.conf"
     datadir_rpcport = 3941
+
+class X13Chain(PpcPosChain):
+    def block_header_hash(chain, header):
+        import x13_hash
+        return x13_hash.getPoWHash(header)
+
+class AeroCoin(X13Chain):
+    def __init__(chain, **kwargs):
+        chain.name = 'AeroCoin'
+        chain.code3 = 'AERO'
+        chain.address_version = '\x23'
+        chain.script_addr_vers = '\x55'
+        chain.magic = '\x70\x35\x22\x05'
+        Chain.__init__(chain, **kwargs)
+
+    datadir_conf_file_name = 'AeroCoin.conf'
+    datadir_rpcport = 27715
+    datadir_p2pport = 27716
+
